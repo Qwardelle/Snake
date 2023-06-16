@@ -52,7 +52,6 @@ function goTop() {
   item = ".item-" + vertical + horizontal;
   startItem = document.querySelector(item);
   startItem.style.backgroundColor = "blue";
-  console.log(item);
   setTimeout(() => {
     if (topNumber == 1) {
       goTop();
