@@ -1,3 +1,12 @@
+.score {
+  position: absolute;
+  left: 70px;
+  margin-top: 150px;
+  font-size: 20px;
+  width: 100px;
+  padding: 10px;
+}
+
 .background {
   width: 100%-20px;
   height: 100%;
