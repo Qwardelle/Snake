@@ -1,52 +1,161 @@
 "use strict";
+let buttonTop = document.querySelector(".buttonTop");
+let topNumber;
+let buttonBottom = document.querySelector(".buttonBottom");
+let bottomNumber;
+let buttonLeft = document.querySelector(".buttonLeft");
+let leftNumber;
+let buttonRight = document.querySelector(".buttonRight");
+let rightNumber;
+let activeItem;
 
-// let startButton = document.querySelector(".buttonStart");
+buttonTop.addEventListener("click", () => {
+  if (topNumber !== 1) {
+    goTop();
+  }
+});
+
+buttonBottom.addEventListener("click", () => {
+  if (bottomNumber !== 1) {
+    goBottom();
+  }
+});
+
+buttonLeft.addEventListener("click", () => {
+  if (leftNumber !== 1) {
+    goLeft();
+  }
+});
+
+buttonRight.addEventListener("click", () => {
+  if (rightNumber !== 1) {
+    goRight();
+  }
+});
+
+let stopButton = document.querySelector(".buttonStop");
+stopButton.setAttribute("disabled", "");
+let startButton = document.querySelector(".buttonStart");
+let vertical = 4;
+let horizontal = 6;
+let item = ".item-" + vertical + horizontal;
+let startItem = document.querySelector(item);
+
+function goTop() {
+  topNumber = 1;
+  bottomNumber = 0;
+  leftNumber = 0;
+  rightNumber = 0;
+  vertical--;
+  setTimeout(() => {
+    startItem.style.backgroundColor = "white";
+    item = ".item-" + vertical + horizontal;
+    startItem = document.querySelector(item);
+    startItem.style.backgroundColor = "blue";
+
+    if (bottomNumber == 0 && leftNumber == 0 && rightNumber == 0) {
+      goTop();
+    }
+  }, 1 * 1000);
+}
+
+function goBottom() {
+  topNumber = 0;
+  bottomNumber = 1;
+  leftNumber = 0;
+  rightNumber = 0;
+  vertical++;
+  setTimeout(() => {
+    startItem.style.backgroundColor = "white";
+    item = ".item-" + vertical + horizontal;
+    startItem = document.querySelector(item);
+    startItem.style.backgroundColor = "blue";
+
+    if (topNumber == 0 && leftNumber == 0 && rightNumber == 0) {
+      goBottom();
+    }
+  }, 1 * 1000);
+}
+
+function goLeft() {
+  topNumber = 0;
+  bottomNumber = 0;
+  leftNumber = 1;
+  rightNumber = 0;
+  horizontal--;
+  setTimeout(() => {
+    startItem.style.backgroundColor = "white";
+    item = ".item-" + vertical + horizontal;
+    startItem = document.querySelector(item);
+    startItem.style.backgroundColor = "blue";
+
+    if (topNumber == 0 && bottomNumber == 0 && rightNumber == 0) {
+      goLeft();
+    }
+  }, 1 * 1000);
+}
+
+function goRight() {
+  topNumber = 0;
+  bottomNumber = 0;
+  leftNumber = 0;
+  rightNumber = 1;
+  horizontal++;
+  setTimeout(() => {
+    startItem.style.backgroundColor = "white";
+    item = ".item-" + vertical + horizontal;
+    startItem = document.querySelector(item);
+    startItem.style.backgroundColor = "blue";
+
+    if (topNumber == 0 && bottomNumber == 0 && leftNumber == 0) {
+      goRight();
+    }
+  }, 1 * 1000);
+}
+
+function startGame() {
+  startItem.style.backgroundColor = "blue";
+  goTop();
+}
+
+startButton.addEventListener("click", () => {
+  startButton.setAttribute("disabled", "");
+  stopButton.removeAttribute("disabled");
+  startGame();
+});
+stopButton.addEventListener("click", () => {
+  stopButton.setAttribute("disabled", "");
+  startButton.removeAttribute("disabled");
+});
+
+// function nextItem() {
+//   startItem.style.backgroundColor = "blue";
+//   vertical++;
+//   setTimeout(() => {
+//     startItem.style.backgroundColor = "white";
+//     item = ".item-" + vertical + horizontal;
+//     startItem = document.querySelector(item);
+//     next();
+//   }, 1 * 1000);
+// }
+
 // startButton.addEventListener("click", () => {
-//   startButton.style.backgroundColor = "blue";
+//   startButton.setAttribute("disabled", "");
+//   stopButton.removeAttribute("disabled");
+//   next(); //Запуск Next
 // });
-
-// let gameItems = document.querySelectorAll(".gameGround");
-// let activeItem = ".item-6";
-// let number = 10;
-// function nextItemTimer() {
-//   if (activeItem == ".item-6") {
-//     setTimeout(() => {
-//       activeItem = activeItem + number;
-//       nextItem();
-//     }, 2 * 1000);
-//     return activeItem;
+// function next() {
+//   //Next
+//   if (startButton.hasAttribute("disabled") == true) {
+//     nextItem();
 //   }
 // }
 
-// let startItem = document.querySelector(activeItem);
-// function nextItem() {
-//   startItem = document.querySelector(activeItem);
-//   startItem.addEventListener("click", () => {
-//     startItem.style.backgroundColor = "yellow";
-//     nextItemTimer();
-//   });
+// stopButton.addEventListener("click", () => {
+//   startButton.removeAttribute("disabled");
+//   stopButton.setAttribute("disabled", "");
+// });
+
+// if (topNumber == 0 && bottomNumber == 0 && leftNumber == 0 && rightNumber == 0) {
+//   goTop()
 // }
-
-// nextItem();
-let number = 6;
-let item = ".item-" + number;
-
-function nextItem() {
-  setTimeout(() => {
-    number = number + 10;
-    item = ".item-" + number;
-    startButton = document.querySelector(item);
-    startButton.style.backgroundColor = "white";
-    next();
-    return number;
-  }, 2 * 1000);
-}
-
-let startButton = document.querySelector(item);
-startButton.addEventListener("click", () => {
-  next();
-});
-function next() {
-  startButton.style.backgroundColor = "blue";
-  nextItem();
-}
