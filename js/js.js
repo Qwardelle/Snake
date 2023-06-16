@@ -10,25 +10,25 @@ let rightNumber;
 let activeItem;
 
 buttonTop.addEventListener("click", () => {
-  if (topNumber !== 1) {
+  if (topNumber !== 1 && bottomNumber !== 1) {
     goTop();
   }
 });
 
 buttonBottom.addEventListener("click", () => {
-  if (bottomNumber !== 1) {
+  if (bottomNumber !== 1 && topNumber !== 1) {
     goBottom();
   }
 });
 
 buttonLeft.addEventListener("click", () => {
-  if (leftNumber !== 1) {
+  if (leftNumber !== 1 && rightNumber !== 1) {
     goLeft();
   }
 });
 
 buttonRight.addEventListener("click", () => {
-  if (rightNumber !== 1) {
+  if (rightNumber !== 1 && leftNumber !== 1) {
     goRight();
   }
 });
@@ -47,12 +47,13 @@ function goTop() {
   leftNumber = 0;
   rightNumber = 0;
   vertical--;
-  setTimeout(() => {
-    startItem.style.backgroundColor = "white";
-    item = ".item-" + vertical + horizontal;
-    startItem = document.querySelector(item);
-    startItem.style.backgroundColor = "blue";
 
+  startItem.style.backgroundColor = "white";
+  item = ".item-" + vertical + horizontal;
+  startItem = document.querySelector(item);
+  startItem.style.backgroundColor = "blue";
+  console.log(item);
+  setTimeout(() => {
     if (topNumber == 1) {
       goTop();
     }
@@ -65,12 +66,12 @@ function goBottom() {
   leftNumber = 0;
   rightNumber = 0;
   vertical++;
-  setTimeout(() => {
-    startItem.style.backgroundColor = "white";
-    item = ".item-" + vertical + horizontal;
-    startItem = document.querySelector(item);
-    startItem.style.backgroundColor = "blue";
+  startItem.style.backgroundColor = "white";
+  item = ".item-" + vertical + horizontal;
+  startItem = document.querySelector(item);
+  startItem.style.backgroundColor = "blue";
 
+  setTimeout(() => {
     if (bottomNumber == 1) {
       goBottom();
     }
@@ -83,12 +84,12 @@ function goLeft() {
   leftNumber = 1;
   rightNumber = 0;
   horizontal--;
-  setTimeout(() => {
-    startItem.style.backgroundColor = "white";
-    item = ".item-" + vertical + horizontal;
-    startItem = document.querySelector(item);
-    startItem.style.backgroundColor = "blue";
+  startItem.style.backgroundColor = "white";
+  item = ".item-" + vertical + horizontal;
+  startItem = document.querySelector(item);
+  startItem.style.backgroundColor = "blue";
 
+  setTimeout(() => {
     if (leftNumber == 1) {
       goLeft();
     }
@@ -101,12 +102,12 @@ function goRight() {
   leftNumber = 0;
   rightNumber = 1;
   horizontal++;
-  setTimeout(() => {
-    startItem.style.backgroundColor = "white";
-    item = ".item-" + vertical + horizontal;
-    startItem = document.querySelector(item);
-    startItem.style.backgroundColor = "blue";
+  startItem.style.backgroundColor = "white";
+  item = ".item-" + vertical + horizontal;
+  startItem = document.querySelector(item);
+  startItem.style.backgroundColor = "blue";
 
+  setTimeout(() => {
     if (rightNumber == 1) {
       goRight();
     }
