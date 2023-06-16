@@ -53,7 +53,7 @@ function goTop() {
     startItem = document.querySelector(item);
     startItem.style.backgroundColor = "blue";
 
-    if (bottomNumber == 0 && leftNumber == 0 && rightNumber == 0) {
+    if (topNumber == 1) {
       goTop();
     }
   }, 1 * 1000);
@@ -71,7 +71,7 @@ function goBottom() {
     startItem = document.querySelector(item);
     startItem.style.backgroundColor = "blue";
 
-    if (topNumber == 0 && leftNumber == 0 && rightNumber == 0) {
+    if (bottomNumber == 1) {
       goBottom();
     }
   }, 1 * 1000);
@@ -89,7 +89,7 @@ function goLeft() {
     startItem = document.querySelector(item);
     startItem.style.backgroundColor = "blue";
 
-    if (topNumber == 0 && bottomNumber == 0 && rightNumber == 0) {
+    if (leftNumber == 1) {
       goLeft();
     }
   }, 1 * 1000);
@@ -107,7 +107,7 @@ function goRight() {
     startItem = document.querySelector(item);
     startItem.style.backgroundColor = "blue";
 
-    if (topNumber == 0 && bottomNumber == 0 && leftNumber == 0) {
+    if (rightNumber == 1) {
       goRight();
     }
   }, 1 * 1000);
