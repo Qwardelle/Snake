@@ -41,17 +41,20 @@ let horizontal = 6;
 let item = ".item-" + vertical + horizontal;
 let startItem = document.querySelector(item);
 
+function goGame() {
+  startItem.style.backgroundColor = "white";
+  item = ".item-" + vertical + horizontal;
+  startItem = document.querySelector(item);
+  startItem.style.backgroundColor = "blue";
+}
+
 function goTop() {
   topNumber = 1;
   bottomNumber = 0;
   leftNumber = 0;
   rightNumber = 0;
   vertical--;
-
-  startItem.style.backgroundColor = "white";
-  item = ".item-" + vertical + horizontal;
-  startItem = document.querySelector(item);
-  startItem.style.backgroundColor = "blue";
+  goGame();
   setTimeout(() => {
     if (topNumber == 1) {
       goTop();
@@ -65,10 +68,7 @@ function goBottom() {
   leftNumber = 0;
   rightNumber = 0;
   vertical++;
-  startItem.style.backgroundColor = "white";
-  item = ".item-" + vertical + horizontal;
-  startItem = document.querySelector(item);
-  startItem.style.backgroundColor = "blue";
+  goGame();
 
   setTimeout(() => {
     if (bottomNumber == 1) {
@@ -83,10 +83,7 @@ function goLeft() {
   leftNumber = 1;
   rightNumber = 0;
   horizontal--;
-  startItem.style.backgroundColor = "white";
-  item = ".item-" + vertical + horizontal;
-  startItem = document.querySelector(item);
-  startItem.style.backgroundColor = "blue";
+  goGame();
 
   setTimeout(() => {
     if (leftNumber == 1) {
@@ -101,10 +98,7 @@ function goRight() {
   leftNumber = 0;
   rightNumber = 1;
   horizontal++;
-  startItem.style.backgroundColor = "white";
-  item = ".item-" + vertical + horizontal;
-  startItem = document.querySelector(item);
-  startItem.style.backgroundColor = "blue";
+  goGame();
 
   setTimeout(() => {
     if (rightNumber == 1) {
