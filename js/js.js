@@ -8,6 +8,38 @@ let leftNumber;
 let buttonRight = document.querySelector(".buttonRight");
 let rightNumber;
 let activeItem;
+let randomHorizonal;
+let randomVertical;
+let randomItem;
+let newLevelItem;
+let score = 0;
+let scoreText = document.querySelector(".score");
+console.log(scoreText);
+scoreText.innerHTML = `Score: ${score}`;
+
+function scorePlus() {
+  if (item == randomItem) {
+    score++;
+    randomItemFunc();
+    scoreText.innerHTML = `Score: ${score}`;
+  }
+}
+
+function randomItemFunc() {
+  randomHorizonal = Math.floor(Math.random() * 10);
+  randomVertical = Math.round(Math.random() * 10);
+  if (randomVertical == 0) {
+    randomItemFunc();
+  } else {
+    randomItem = ".item-" + randomHorizonal + randomVertical;
+    console.log(randomItem);
+    newLevelItem = document.querySelector(randomItem);
+    newLevelItem.style.backgroundColor = "yellow";
+  }
+}
+randomItemFunc();
+
+newLevelItem.style.backgroundColor = "yellow";
 
 buttonTop.addEventListener("click", () => {
   if (topNumber !== 1 && bottomNumber !== 1) {
@@ -46,6 +78,7 @@ function goGame() {
   item = ".item-" + vertical + horizontal;
   startItem = document.querySelector(item);
   startItem.style.backgroundColor = "blue";
+  scorePlus();
 }
 
 function goTop() {
@@ -55,6 +88,7 @@ function goTop() {
   rightNumber = 0;
   vertical--;
   goGame();
+  scorePlus();
   setTimeout(() => {
     if (topNumber == 1) {
       goTop();
@@ -69,7 +103,7 @@ function goBottom() {
   rightNumber = 0;
   vertical++;
   goGame();
-
+  scorePlus();
   setTimeout(() => {
     if (bottomNumber == 1) {
       goBottom();
@@ -84,7 +118,7 @@ function goLeft() {
   rightNumber = 0;
   horizontal--;
   goGame();
-
+  scorePlus();
   setTimeout(() => {
     if (leftNumber == 1) {
       goLeft();
@@ -99,7 +133,7 @@ function goRight() {
   rightNumber = 1;
   horizontal++;
   goGame();
-
+  scorePlus();
   setTimeout(() => {
     if (rightNumber == 1) {
       goRight();
