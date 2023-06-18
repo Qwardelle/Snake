@@ -26,16 +26,12 @@ function scorePlus() {
 }
 
 function randomItemFunc() {
-  randomHorizonal = Math.floor(Math.random() * 10);
-  randomVertical = Math.round(Math.random() * 10);
-  if (randomVertical == 0) {
-    randomItemFunc();
-  } else {
-    randomItem = ".item-" + randomHorizonal + randomVertical;
-    console.log(randomItem);
-    newLevelItem = document.querySelector(randomItem);
-    newLevelItem.style.backgroundColor = "yellow";
-  }
+  randomHorizonal = Math.round(Math.random() * 9);
+  randomVertical = Math.round(Math.random() * 9);
+  randomItem = ".item-" + randomHorizonal + randomVertical;
+  console.log(randomItem);
+  newLevelItem = document.querySelector(randomItem);
+  newLevelItem.style.backgroundColor = "yellow";
 }
 randomItemFunc();
 
@@ -82,63 +78,79 @@ function goGame() {
 }
 
 function goTop() {
-  topNumber = 1;
-  bottomNumber = 0;
-  leftNumber = 0;
-  rightNumber = 0;
-  vertical--;
-  goGame();
-  scorePlus();
-  setTimeout(() => {
-    if (topNumber == 1) {
-      goTop();
-    }
-  }, 1 * 1000);
+  if (vertical == 0) {
+    alert("You Lose");
+  } else {
+    topNumber = 1;
+    bottomNumber = 0;
+    leftNumber = 0;
+    rightNumber = 0;
+    vertical--;
+    goGame();
+    scorePlus();
+    setTimeout(() => {
+      if (topNumber == 1) {
+        goTop();
+      }
+    }, 1 * 1000);
+  }
 }
 
 function goBottom() {
-  topNumber = 0;
-  bottomNumber = 1;
-  leftNumber = 0;
-  rightNumber = 0;
-  vertical++;
-  goGame();
-  scorePlus();
-  setTimeout(() => {
-    if (bottomNumber == 1) {
-      goBottom();
-    }
-  }, 1 * 1000);
+  if (vertical == 9) {
+    alert("You Lose");
+  } else {
+    topNumber = 0;
+    bottomNumber = 1;
+    leftNumber = 0;
+    rightNumber = 0;
+    vertical++;
+    goGame();
+    scorePlus();
+    setTimeout(() => {
+      if (bottomNumber == 1) {
+        goBottom();
+      }
+    }, 1 * 1000);
+  }
 }
 
 function goLeft() {
-  topNumber = 0;
-  bottomNumber = 0;
-  leftNumber = 1;
-  rightNumber = 0;
-  horizontal--;
-  goGame();
-  scorePlus();
-  setTimeout(() => {
-    if (leftNumber == 1) {
-      goLeft();
-    }
-  }, 1 * 1000);
+  if (horizontal == 0) {
+    alert("You Lose");
+  } else {
+    topNumber = 0;
+    bottomNumber = 0;
+    leftNumber = 1;
+    rightNumber = 0;
+    horizontal--;
+    goGame();
+    scorePlus();
+    setTimeout(() => {
+      if (leftNumber == 1) {
+        goLeft();
+      }
+    }, 1 * 1000);
+  }
 }
 
 function goRight() {
-  topNumber = 0;
-  bottomNumber = 0;
-  leftNumber = 0;
-  rightNumber = 1;
-  horizontal++;
-  goGame();
-  scorePlus();
-  setTimeout(() => {
-    if (rightNumber == 1) {
-      goRight();
-    }
-  }, 1 * 1000);
+  if (horizontal == 9) {
+    alert("You Lose");
+  } else {
+    topNumber = 0;
+    bottomNumber = 0;
+    leftNumber = 0;
+    rightNumber = 1;
+    horizontal++;
+    goGame();
+    scorePlus();
+    setTimeout(() => {
+      if (rightNumber == 1) {
+        goRight();
+      }
+    }, 1 * 1000);
+  }
 }
 
 function startGame() {
