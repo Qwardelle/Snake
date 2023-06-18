@@ -31,8 +31,12 @@ let whiteColor;
 function deleteString() {
   arr.splice(0, 1);
   if (arr.length >= 1) {
-    whiteColor = document.querySelector(arr[arr.length - 1]);
-    whiteColor.style.backgroundColor = "white";
+    for (let value of arr) {
+      whiteColor = document.querySelector(value);
+      whiteColor.style.backgroundColor = "white";
+    }
+    // whiteColor = document.querySelector(arr[arr.length - 1]);
+    // whiteColor.style.backgroundColor = "white";
     // whiteColor = document.querySelectorAll(...arr);
     // whiteColor.style.backgroundColor = "white";
   }
