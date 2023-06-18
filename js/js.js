@@ -13,12 +13,34 @@ let randomVertical;
 let randomItem;
 let newLevelItem;
 let score = 0;
+let arr = [];
+let dontVar;
+let dontVar2;
+let arrSnake = arr[arr.length - (1 - score)];
+let arrSnakeItem = document.querySelector(arrSnake);
 let scoreText = document.querySelector(".score");
 console.log(scoreText);
 scoreText.innerHTML = `Score: ${score}`;
 
+function snakeLength() {
+  arr.push(item);
+  arrSnake = arr[arr.length - (1 - score)];
+  arrSnakeItem = document.querySelector(arrSnake);
+}
+let whiteColor;
+function deleteString() {
+  arr.splice(0, 1);
+  if (arr.length >= 1) {
+    whiteColor = document.querySelector(arr[arr.length - 1]);
+    whiteColor.style.backgroundColor = "white";
+    // whiteColor = document.querySelectorAll(...arr);
+    // whiteColor.style.backgroundColor = "white";
+  }
+}
+
 function scorePlus() {
   if (item == randomItem) {
+    arr.push(item);
     score++;
     randomItemFunc();
     scoreText.innerHTML = `Score: ${score}`;
@@ -28,10 +50,19 @@ function scorePlus() {
 function randomItemFunc() {
   randomHorizonal = Math.round(Math.random() * 9);
   randomVertical = Math.round(Math.random() * 9);
-  randomItem = ".item-" + randomHorizonal + randomVertical;
-  console.log(randomItem);
-  newLevelItem = document.querySelector(randomItem);
-  newLevelItem.style.backgroundColor = "yellow";
+  dontVar = ".item-" + randomHorizonal + randomVertical;
+  dontVar2 = document.querySelector(dontVar);
+  if (
+    dontVar2.style.backgroundColor == "blue" ||
+    dontVar2.style.backgroundColor == "white"
+  ) {
+    randomItemFunc();
+  } else {
+    randomItem = ".item-" + randomHorizonal + randomVertical;
+    console.log(randomItem);
+    newLevelItem = document.querySelector(randomItem);
+    newLevelItem.style.backgroundColor = "yellow";
+  }
 }
 randomItemFunc();
 
@@ -70,24 +101,40 @@ let item = ".item-" + vertical + horizontal;
 let startItem = document.querySelector(item);
 
 function goGame() {
-  startItem.style.backgroundColor = "white";
+  // startItem.style.backgroundColor = "red";
   item = ".item-" + vertical + horizontal;
   startItem = document.querySelector(item);
+  deleteString();
   startItem.style.backgroundColor = "blue";
   scorePlus();
+}
+
+// function snake() {
+//   setTimeout(() => {
+//     arrSnakeItem.style.backgroundColor = "red";
+//   }, 1 * 1000);
+// }
+
+function snake() {
+  arrSnakeItem.style.backgroundColor = "red";
 }
 
 function goTop() {
   if (vertical == 0) {
     alert("You Lose");
   } else {
+    scorePlus();
+    arr.push(item);
+    arrSnake = arr[arr.length - (1 + score)];
+    arrSnakeItem = document.querySelector(arrSnake);
+    arrSnakeItem.style.backgroundColor = "red";
+    console.log(arr);
     topNumber = 1;
     bottomNumber = 0;
     leftNumber = 0;
     rightNumber = 0;
     vertical--;
     goGame();
-    scorePlus();
     setTimeout(() => {
       if (topNumber == 1) {
         goTop();
@@ -100,13 +147,18 @@ function goBottom() {
   if (vertical == 9) {
     alert("You Lose");
   } else {
+    scorePlus();
+    arr.push(item);
+    arrSnake = arr[arr.length - (1 + score)];
+    arrSnakeItem = document.querySelector(arrSnake);
+    arrSnakeItem.style.backgroundColor = "red";
+    console.log(arr);
     topNumber = 0;
     bottomNumber = 1;
     leftNumber = 0;
     rightNumber = 0;
     vertical++;
     goGame();
-    scorePlus();
     setTimeout(() => {
       if (bottomNumber == 1) {
         goBottom();
@@ -119,13 +171,18 @@ function goLeft() {
   if (horizontal == 0) {
     alert("You Lose");
   } else {
+    scorePlus();
+    arr.push(item);
+    arrSnake = arr[arr.length - (1 + score)];
+    arrSnakeItem = document.querySelector(arrSnake);
+    arrSnakeItem.style.backgroundColor = "red";
+    console.log(arr);
     topNumber = 0;
     bottomNumber = 0;
     leftNumber = 1;
     rightNumber = 0;
     horizontal--;
     goGame();
-    scorePlus();
     setTimeout(() => {
       if (leftNumber == 1) {
         goLeft();
@@ -138,13 +195,18 @@ function goRight() {
   if (horizontal == 9) {
     alert("You Lose");
   } else {
+    scorePlus();
+    arr.push(item);
+    arrSnake = arr[arr.length - (1 + score)];
+    arrSnakeItem = document.querySelector(arrSnake);
+    arrSnakeItem.style.backgroundColor = "red";
+    console.log(arr);
     topNumber = 0;
     bottomNumber = 0;
     leftNumber = 0;
     rightNumber = 1;
     horizontal++;
     goGame();
-    scorePlus();
     setTimeout(() => {
       if (rightNumber == 1) {
         goRight();
@@ -154,7 +216,7 @@ function goRight() {
 }
 
 function startGame() {
-  startItem.style.backgroundColor = "blue";
+  // startItem.style.backgroundColor = "blue";
   goTop();
 }
 
