@@ -19,8 +19,34 @@ let dontVar2;
 let arrSnake = arr[arr.length - (1 - score)];
 let arrSnakeItem = document.querySelector(arrSnake);
 let scoreText = document.querySelector(".score");
-console.log(scoreText);
 scoreText.innerHTML = `Score: ${score}`;
+let lose1;
+let lose2;
+let lose3 = 0;
+let record = 0;
+let record1 = 0;
+record = document.querySelector(".record");
+record.innerHTML = `Record: ${0}`;
+
+let restart = document.querySelector(".buttonRestart");
+restart.addEventListener("click", () => {
+  youLose();
+});
+
+function youLose() {
+  stopButton.setAttribute("disabled", "");
+  startButton.setAttribute("disabled", "");
+  buttonTop.setAttribute("disabled", "");
+  buttonBottom.setAttribute("disabled", "");
+  buttonLeft.setAttribute("disabled", "");
+  buttonRight.setAttribute("disabled", "");
+  restart.style.display = "block";
+  lose3 = 1;
+  if (score > record1) {
+    record1 = score;
+    record.innerHTML = `Record: ${record1}`;
+  }
+}
 
 function snakeLength() {
   arr.push(item);
@@ -35,10 +61,6 @@ function deleteString() {
       whiteColor = document.querySelector(value);
       whiteColor.style.backgroundColor = "white";
     }
-    // whiteColor = document.querySelector(arr[arr.length - 1]);
-    // whiteColor.style.backgroundColor = "white";
-    // whiteColor = document.querySelectorAll(...arr);
-    // whiteColor.style.backgroundColor = "white";
   }
 }
 
@@ -63,7 +85,6 @@ function randomItemFunc() {
     randomItemFunc();
   } else {
     randomItem = ".item-" + randomHorizonal + randomVertical;
-    console.log(randomItem);
     newLevelItem = document.querySelector(randomItem);
     newLevelItem.style.backgroundColor = "yellow";
   }
@@ -105,7 +126,6 @@ let item = ".item-" + vertical + horizontal;
 let startItem = document.querySelector(item);
 
 function goGame() {
-  // startItem.style.backgroundColor = "red";
   item = ".item-" + vertical + horizontal;
   startItem = document.querySelector(item);
   deleteString();
@@ -113,31 +133,31 @@ function goGame() {
   scorePlus();
 }
 
-// function snake() {
-//   setTimeout(() => {
-//     arrSnakeItem.style.backgroundColor = "red";
-//   }, 1 * 1000);
-// }
-
 function snake() {
   arrSnakeItem.style.backgroundColor = "red";
 }
 
 function goTop() {
-  if (vertical == 0) {
-    alert("You Lose");
+  if (vertical == 0 || lose3 == 1) {
+    youLose();
   } else {
     scorePlus();
     arr.push(item);
     arrSnake = arr[arr.length - (1 + score)];
     arrSnakeItem = document.querySelector(arrSnake);
     arrSnakeItem.style.backgroundColor = "red";
-    console.log(arr);
+    arrSnakeItem.innerHTML = "";
     topNumber = 1;
     bottomNumber = 0;
     leftNumber = 0;
     rightNumber = 0;
+    lose1 = ".item-" + (vertical - 1) + horizontal;
+    lose2 = document.querySelector(lose1);
+    if (lose2.style.backgroundColor == "white") {
+      youLose();
+    }
     vertical--;
+
     goGame();
     setTimeout(() => {
       if (topNumber == 1) {
@@ -148,19 +168,24 @@ function goTop() {
 }
 
 function goBottom() {
-  if (vertical == 9) {
-    alert("You Lose");
+  if (vertical == 9 || lose3 == 1) {
+    youLose();
   } else {
     scorePlus();
     arr.push(item);
     arrSnake = arr[arr.length - (1 + score)];
     arrSnakeItem = document.querySelector(arrSnake);
     arrSnakeItem.style.backgroundColor = "red";
-    console.log(arr);
+    arrSnakeItem.innerHTML = "";
     topNumber = 0;
     bottomNumber = 1;
     leftNumber = 0;
     rightNumber = 0;
+    lose1 = ".item-" + (vertical + 1) + horizontal;
+    lose2 = document.querySelector(lose1);
+    if (lose2.style.backgroundColor == "white") {
+      youLose();
+    }
     vertical++;
     goGame();
     setTimeout(() => {
@@ -172,19 +197,24 @@ function goBottom() {
 }
 
 function goLeft() {
-  if (horizontal == 0) {
-    alert("You Lose");
+  if (horizontal == 0 || lose3 == 1) {
+    youLose();
   } else {
     scorePlus();
     arr.push(item);
     arrSnake = arr[arr.length - (1 + score)];
     arrSnakeItem = document.querySelector(arrSnake);
     arrSnakeItem.style.backgroundColor = "red";
-    console.log(arr);
+    arrSnakeItem.innerHTML = "";
     topNumber = 0;
     bottomNumber = 0;
     leftNumber = 1;
     rightNumber = 0;
+    lose1 = ".item-" + vertical + (horizontal - 1);
+    lose2 = document.querySelector(lose1);
+    if (lose2.style.backgroundColor == "white") {
+      youLose();
+    }
     horizontal--;
     goGame();
     setTimeout(() => {
@@ -196,19 +226,24 @@ function goLeft() {
 }
 
 function goRight() {
-  if (horizontal == 9) {
-    alert("You Lose");
+  if (horizontal == 9 || lose3 == 1) {
+    youLose();
   } else {
     scorePlus();
     arr.push(item);
     arrSnake = arr[arr.length - (1 + score)];
     arrSnakeItem = document.querySelector(arrSnake);
     arrSnakeItem.style.backgroundColor = "red";
-    console.log(arr);
+    arrSnakeItem.innerHTML = "";
     topNumber = 0;
     bottomNumber = 0;
     leftNumber = 0;
     rightNumber = 1;
+    lose1 = ".item-" + vertical + (horizontal + 1);
+    lose2 = document.querySelector(lose1);
+    if (lose2.style.backgroundColor == "white") {
+      youLose();
+    }
     horizontal++;
     goGame();
     setTimeout(() => {
@@ -220,7 +255,6 @@ function goRight() {
 }
 
 function startGame() {
-  // startItem.style.backgroundColor = "blue";
   goTop();
 }
 
@@ -233,35 +267,3 @@ stopButton.addEventListener("click", () => {
   stopButton.setAttribute("disabled", "");
   startButton.removeAttribute("disabled");
 });
-
-// function nextItem() {
-//   startItem.style.backgroundColor = "blue";
-//   vertical++;
-//   setTimeout(() => {
-//     startItem.style.backgroundColor = "white";
-//     item = ".item-" + vertical + horizontal;
-//     startItem = document.querySelector(item);
-//     next();
-//   }, 1 * 1000);
-// }
-
-// startButton.addEventListener("click", () => {
-//   startButton.setAttribute("disabled", "");
-//   stopButton.removeAttribute("disabled");
-//   next(); //Запуск Next
-// });
-// function next() {
-//   //Next
-//   if (startButton.hasAttribute("disabled") == true) {
-//     nextItem();
-//   }
-// }
-
-// stopButton.addEventListener("click", () => {
-//   startButton.removeAttribute("disabled");
-//   stopButton.setAttribute("disabled", "");
-// });
-
-// if (topNumber == 0 && bottomNumber == 0 && leftNumber == 0 && rightNumber == 0) {
-//   goTop()
-// }
