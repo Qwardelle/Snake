@@ -30,7 +30,7 @@ record.innerHTML = `Record: ${0}`;
 
 let restart = document.querySelector(".buttonRestart");
 restart.addEventListener("click", () => {
-  youLose();
+  alert("Заленился делать эту кнопку :(");
 });
 
 function youLose() {
